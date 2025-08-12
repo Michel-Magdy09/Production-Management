@@ -1,0 +1,127 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+}
+
+h2, h3 {
+    color: #333;
+}
+
+.section, .filter, table, .gantt-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+input, select, button {
+  margin: 5px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f0f0f0;
+  text-align: center;
+}
+td {
+    text-align: center;
+}
+
+#ganttChart {
+  height: auto;
+  min-height: 400px;
+}
+
+/* The Gantt bar color classes below are no longer needed for coloring,
+  as JavaScript now handles it directly. They can be safely removed.
+*/
+/*
+.gantt-completed rect {
+  fill: #4CAF50 !important;
+}
+.gantt-inprogress rect {
+  fill: #FFC107 !important;
+}
+.gantt-notstarted rect {
+  fill: #9E9E9E !important;
+}
+.gantt-stopped rect {
+  fill: #F44336 !important;
+}
+*/
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.modal-content label, .modal-content select, .modal-content input {
+    display: block;
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

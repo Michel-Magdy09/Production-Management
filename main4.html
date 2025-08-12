@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestione Produzione</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+  <h2>📦 Gestione Produzione</h2>
+
+  <div class="section">
+    <h3>📋 Inserisci Pezzo</h3>
+    <label for="idScheda">ID Pezzo</label>
+    <input type="text" id="idScheda" placeholder="ID Pezzo">
+
+    <label for="materiale">Materiale</label>
+    <input type="text" id="materiale" placeholder="Materiale">
+
+    <label for="quantita">Quantità</label>
+    <input type="number" id="quantita" placeholder="Quantità" min="1">
+
+    <label for="consegnaRichiesta">Scadenza</label>
+    <input type="date" id="consegnaRichiesta">
+
+    <button onclick="salvaScheda()">💾 Salva Pezzo</button>
+  </div>
+
+  <div class="section">
+    <h3>🛠️ Inserisci Fase</h3>
+    <label for="idPezzo">Seleziona ID Pezzo</label>
+    <select id="idPezzo"></select>
+
+    <label for="descrizione">Descrizione Fase</label>
+    <input type="text" id="descrizione" placeholder="Descrizione Fase">
+
+    <label for="inizio">Data Inizio</label>
+    <input type="datetime-local" id="inizio">
+
+    <label for="oreNecessarie">Ore Necessarie</label>
+    <input type="number" id="oreNecessarie" placeholder="Ore necessarie" min="1">
+
+    <label for="turni">Seleziona Turni</label>
+    <select id="turni">
+      <option value="8">1 turno - 8 ore</option>
+      <option value="16">2 turni - 16 ore</option>
+      <option value="24">3 turni - 24 ore</option>
+    </select>
+
+    <label for="risorsa">Seleziona risorsa</label>
+    <select id="risorsa">
+      <option value="Macchina 1">Macchina 1</option>
+      <option value="Macchina 2">Macchina 2</option>
+      <option value="Macchina 3">Macchina 3</option>
+      <option value="Macchina 4">Macchina 4</option>
+      <option value="Macchina 5">Macchina 5</option>
+      <option value="Macchina 6">Macchina 6</option>
+      <option value="Macchina 7">Macchina 7</option>
+      <option value="Macchina 8">Macchina 8</option>
+      <option value="Macchina 9">Macchina 9</option>
+      <option value="Dipartimento A">Dipartimento A</option>
+      <option value="Dipartimento B">Dipartimento B</option>
+      <option value="Dipartimento C">Dipartimento C</option>
+      <option value="Dipartimento D">Dipartimento D</option>
+    </select>
+
+    <label>
+      <input type="checkbox" id="weekend"> Lavora nel weekend
+    </label>
+
+    <button onclick="salvaFase()">💾 Salva Fase</button>
+    <button onclick="esportaExcel()">📤 Esporta Excel</button>
+  </div>
+
+  <table id="tabellaFasi">
+    <thead>
+      <tr>
+        <th>ID Pezzo</th>
+        <th>Descrizione</th>
+        <th>Stato</th>
+        <th>Inizio</th>
+        <th>Fine</th>
+        <th>Ore</th>
+        <th>Risorsa</th>
+        <th>Turni</th>
+        <th>Weekend</th>
+        <th>Azioni</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="filter">
+    <label for="filtroRisorsa">🔍 Filtra per macchina/dipartimento:</label>
+    <select id="filtroRisorsa" onchange="disegnaGantt()">
+      <option value="">-- Tutte --</option>
+      <option value="Macchina 1">Macchina 1</option>
+      <option value="Macchina 2">Macchina 2</option>
+      <option value="Macchina 3">Macchina 3</option>
+      <option value="Macchina 4">Macchina 4</option>
+      <option value="Macchina 5">Macchina 5</option>
+      <option value="Macchina 6">Macchina 6</option>
+      <option value="Macchina 7">Macchina 7</option>
+      <option value="Macchina 8">Macchina 8</option>
+      <option value="Macchina 9">Macchina 9</option>
+      <option value="Dipartimento A">Dipartimento A</option>
+      <option value="Dipartimento B">Dipartimento B</option>
+      <option value="Dipartimento C">Dipartimento C</option>
+      <option value="Dipartimento D">Dipartimento D</option>
+    </select>
+  </div>
+  
+  <div class="gantt-container">
+    <h3>📊 Gantt Occupazione Macchine</h3>
+    <div id="ganttChart"></div>
+  </div>
+
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="chiudiModal()">&times;</span>
+        <h3>Modifica Fase</h3>
+        
+        <label for="editStatus">Stato:</label>
+        <select id="editStatus">
+            <option value="Not Started">Non Iniziata</option>
+            <option value="In Progress">In Corso</option>
+            <option value="Completed">Completata</option>
+            <option value="Stopped">Ferma/In Ritardo</option>
+        </select>
+        
+        <label for="editOre">Durata (ore):</label>
+        <input type="number" id="editOre" min="1">
+        
+        <button onclick="salvaModificheFase()">💾 Salva Modifiche</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
